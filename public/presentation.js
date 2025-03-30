@@ -35,28 +35,56 @@ async function fetchPlaylistTracks() {
 
 // Display Track Details
 function displayTrack() {
-    if (tracks.length === 0) return;
+  if (tracks.length === 0) return;
+
+  const track = tracks[currentTrackIndex].track;
+
+  const albumName = track.album.name;
+  const releaseDate = track.album.release_date.split('-')[0];
+  const artistNames = track.artists.map(artist => artist.name).join(', ');
+  const albumArtUrl = track.album.images[0]?.url || 'https://via.placeholder.com/300';
+
+  document.getElementById('album-art').src = track.album.images[0]?.url || 'https://via.placeholder.com/300';
+  document.getElementById('song-title').textContent = track.name;
+  document.getElementById('artist-name').textContent = artistNames;
+  document.getElementById('album-name').textContent = `${albumName} (${releaseDate})`;
+
+  // Set blurred album art as background
+  const backgroundOverlay = document.getElementById('background-overlay');
+  backgroundOverlay.style.backgroundImage = `url('${albumArtUrl}')`;
+
+  // Fetch and display trivia
+  fetchFactoid(track.name, artistNames, albumName, releaseDate);
+
+  playTrack(track.uri);
+
+  // Adjust album art size based on song details
+  function adjustAlbumArtSize() {
+    const albumArt = document.getElementById('album-art');
+    const songDetails = document.getElementById('song-details');
+    const presentedItem = document.getElementById('presented_item');
   
-    const track = tracks[currentTrackIndex].track;
-    
-    const albumName = track.album.name;
-    const releaseDate = track.album.release_date.split('-')[0];
-    const artistNames = track.artists.map(artist => artist.name).join(', ');
-    const albumArtUrl = track.album.images[0]?.url || 'https://via.placeholder.com/300';
+    // Get edge positions using getBoundingClientRect
+    const presentedBottom = presentedItem.getBoundingClientRect().bottom;
+    const songDetailsTop = songDetails.getBoundingClientRect().top;
+  
+    // Calculate the space between the bottom of presented_item and the top of song_details
+    const availableHeight = songDetailsTop - presentedBottom - 40; // Add a 40px buffer
+  
+    // Ensure album art doesn't shrink below 150px
+    const newHeight = Math.max(availableHeight, 150);
+    albumArt.style.maxHeight = `${newHeight}px`;
+  }
 
-    document.getElementById('album-art').src = track.album.images[0]?.url || 'https://via.placeholder.com/300';
-    document.getElementById('song-title').textContent = track.name;
-    document.getElementById('artist-name').textContent = artistNames;
-    document.getElementById('album-name').textContent = `${albumName} (${releaseDate})`;
+  // Run initially to ensure proper sizing
+  adjustAlbumArtSize();
 
-    // Set blurred album art as background
-    const backgroundOverlay = document.getElementById('background-overlay');
-    backgroundOverlay.style.backgroundImage = `url('${albumArtUrl}')`;
+  // Observe changes to song details and presented item for dynamic resizing
+  const resizeObserver = new ResizeObserver(adjustAlbumArtSize);
 
-    // Fetch and display trivia
-    fetchFactoid(track.name, artistNames, albumName, releaseDate);
-
-    playTrack(track.uri);
+  resizeObserver.observe(document.getElementById('song-details'));
+  resizeObserver.observe(document.getElementById('presented_item'));
+  window.addEventListener('resize', adjustAlbumArtSize);
 }
 
 // Transfer Playback to Selected Device and Play Track
