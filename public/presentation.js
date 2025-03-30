@@ -44,7 +44,10 @@ function displayTrack() {
   const artistNames = track.artists.map(artist => artist.name).join(', ');
   const albumArtUrl = track.album.images[0]?.url || 'https://via.placeholder.com/300';
 
-  document.getElementById('album-art').src = track.album.images[0]?.url || 'https://via.placeholder.com/300';
+  // Set album art URL
+  document.getElementById('album-art').src = albumArtUrl;
+
+  // Set song details
   document.getElementById('song-title').textContent = track.name;
   document.getElementById('artist-name').textContent = artistNames;
   document.getElementById('album-name').textContent = `${albumName} (${releaseDate})`;
@@ -56,35 +59,8 @@ function displayTrack() {
   // Fetch and display trivia
   fetchFactoid(track.name, artistNames, albumName, releaseDate);
 
+  // Play track
   playTrack(track.uri);
-
-  // Adjust album art size based on song details
-  function adjustAlbumArtSize() {
-    const albumArt = document.getElementById('album-art');
-    const songDetails = document.getElementById('song-details');
-    const presentedItem = document.getElementById('presented_item');
-  
-    // Get edge positions using getBoundingClientRect
-    const presentedBottom = presentedItem.getBoundingClientRect().bottom;
-    const songDetailsTop = songDetails.getBoundingClientRect().top;
-  
-    // Calculate the space between the bottom of presented_item and the top of song_details
-    const availableHeight = songDetailsTop - presentedBottom - 40; // Add a 40px buffer
-  
-    // Ensure album art doesn't shrink below 150px
-    const newHeight = Math.max(availableHeight, 150);
-    albumArt.style.maxHeight = `${newHeight}px`;
-  }
-
-  // Run initially to ensure proper sizing
-  adjustAlbumArtSize();
-
-  // Observe changes to song details and presented item for dynamic resizing
-  const resizeObserver = new ResizeObserver(adjustAlbumArtSize);
-
-  resizeObserver.observe(document.getElementById('song-details'));
-  resizeObserver.observe(document.getElementById('presented_item'));
-  window.addEventListener('resize', adjustAlbumArtSize);
 }
 
 // Transfer Playback to Selected Device and Play Track

@@ -23,7 +23,6 @@ async function fetchDevices() {
   }
 }
 
-// Display Devices
 function displayDevices(devices) {
   const devicesList = document.getElementById('devices-list');
   devicesList.innerHTML = '';
@@ -34,7 +33,7 @@ function displayDevices(devices) {
   }
 
   devices.forEach((device) => {
-    const deviceElement = document.createElement('div');
+    const deviceElement = document.createElement('button'); // Change to button
     deviceElement.classList.add('device');
     deviceElement.textContent = `${device.name} (${device.type})`;
     deviceElement.onclick = () => selectDevice(device.id, deviceElement);

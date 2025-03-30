@@ -6,28 +6,34 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/node-vibrant/3.1.7/vibrant.min.js"></script>
 </head>
 <body>
-    <div id="presentation-container">
+  <div id="presentation-container">
     <div id="background-overlay"></div>
-    
-    <!-- Artist and Album Name First -->
-     <div id="presented_item">
-        <h2 id="artist-name">Artist Name</h2>
-        <p id="album-name">Album Name (Year)</p>
+    <div id="content-wrapper">
+      
+      <!-- Left Column for Presented Item and Album Art -->
+      <div id="left-column">
+        <img id="album-art" src="" alt="Album Art">
+      </div>
+
+      <!-- Right Column for Song Details -->
+      <div id="right-column">
+        <div id="presented_item">
+          <h2 id="artist-name">Artist Name</h2>
+          <h3 id="album-name">Album Name (Year)</h3>
+        </div>
+        <div id="song-details">
+          <h1 id="song-title">Song Title</h1>
+          <p id="factoid">Fun fact will appear here</p>
+        </div>
+      </div>
     </div>
 
-    <!-- Album Art Below -->
-    <img id="album-art" src="" alt="Album Art">
-
-    <div id="song-details">
-      <h1 id="song-title">Song Title</h1>
-      <p id="factoid">Fun fact will appear here</p>
-    </div>
-
+    <!-- Buttons at the Bottom -->
     <div id="button-container">
-      <button id="return-to-playlists">Return to Playlists</button>
-      <button id="prev">Previous</button>
       <button id="play-pause">Play</button>
       <button id="next">Next</button>
+      <button id="prev">Previous</button>
+      <button id="return-to-playlists">Return to Playlists</button>
     </div>
   </div>
 
