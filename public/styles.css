@@ -206,7 +206,7 @@ button:hover {
 }
 
 /* Widescreen View */
-@media (min-width: 1600px) {
+@media (min-width: 1200px) {
   #content-wrapper {
     flex-direction: row;
     justify-content: space-around;
@@ -243,7 +243,7 @@ button:hover {
 }
 
 /* Narrow screen (single-column) view */
-@media (max-width: 1600px) {
+@media (max-width: 1200px) {
   body {
     overflow-y: auto; /* Allow scrolling when content overflows */
     padding: 0;
