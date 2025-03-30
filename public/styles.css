@@ -302,3 +302,59 @@ body {
     font-size: 1.5rem !important;
     color: #ccc !important;
   }
+
+  /* Index Page Specific Styles */
+#index-page {
+  background-color: #1E1E1E; /* Dark background for contrast */
+  color: white;
+}
+
+#index-page h1 {
+  font-size: 3rem;
+  color: #1DB954; /* Spotify Green for a nice effect */
+  margin-bottom: 40px;
+}
+
+#index-page button {
+  background-color: #1DB954;
+  color: white;
+  font-size: 1.2rem;
+  padding: 15px 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+#index-page button:hover {
+  background-color: #17a34a;
+}
+
+/* Playlist Cards */
+#index-page #playlists {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#index-page .playlist {
+  background-color: #333;
+  color: white;
+  margin: 15px;
+  padding: 15px;
+  border-radius: 12px;
+  width: 220px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+#index-page .playlist:hover {
+  transform: translateY(-5px);
+  background-color: #444;
+}
+
+/* Ensure images fit well */
+#index-page .playlist img {
+  width: 100%;
+  border-radius: 10px;
+}
