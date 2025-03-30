@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Spotify Playlist Presenter</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/node-vibrant/3.1.7/vibrant.min.js"></script>
+</head>
+<body>
+    <div id="presentation-container">
+    <div id="background-overlay"></div>
+    
+    <!-- Artist and Album Name First -->
+     <div id="presented_item">
+        <h2 id="artist-name">Artist Name</h2>
+        <p id="album-name">Album Name (Year)</p>
+    </div>
+
+    <!-- Album Art Below -->
+    <img id="album-art" src="" alt="Album Art">
+
+    <div id="song-details">
+      <h1 id="song-title">Song Title</h1>
+      <p id="factoid">Fun fact will appear here</p>
+    </div>
+
+    <div id="button-container">
+      <button id="return-to-playlists">Return to Playlists</button>
+      <button id="prev">Previous</button>
+      <button id="play-pause">Play</button>
+      <button id="next">Next</button>
+    </div>
+  </div>
+
+  <script src="presentation.js"></script>
+</body>
+</html>
